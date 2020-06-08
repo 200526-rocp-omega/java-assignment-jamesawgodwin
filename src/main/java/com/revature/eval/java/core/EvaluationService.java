@@ -54,13 +54,14 @@ public class EvaluationService {
 		 */
 		public static String printConversion(double kilometersPerHour) {
 			// TODO Write an implementation for this method declaration
+			String str;
 			if (kilometersPerHour < 0) {
-				System.out.println("Invalid Value");
+				str = ("Invalid Value");
 			} else {
-				System.out.println(kilometersPerHour + " km/hr = " + SpeedConverter.toMilesPerHour(kilometersPerHour) + " mi/h");
+				str = (kilometersPerHour + " km/h = " + SpeedConverter.toMilesPerHour(kilometersPerHour) + " mi/h");
 			
 			}
-			return null;
+			return str;
 		}
 	}
 
@@ -85,14 +86,15 @@ public class EvaluationService {
 	 * Value".
 	 */
 	public String printMegaBytesAndKiloBytes(int kiloBytes) {
+		String str;
 		if (kiloBytes < 0) {
-			System.out.println("Invalid Value");
+			str = ("Invalid Value");
 		} else {
 			
-			System.out.println(kiloBytes + " KB = " + kiloBytes/1024 + " and " + kiloBytes%1024 + " KB");
+			str = (kiloBytes + " KB = " + kiloBytes/1024 + " MB and " + kiloBytes%1024 + " KB");
 		}
 	
-		return null;
+		return str;
 	}
 
 	/**
@@ -198,13 +200,14 @@ public class EvaluationService {
 	 * ZZ represents the calculated days.
 	 */
 	public String printYearsAndDays(long minutes) {
+		String str;
 		if (minutes < 0) {
-			System.out.println("Invalid Value");
+			str = ("Invalid Value");
 		} else {
-			System.out.println(minutes + " min = " + minutes/525600 + " y and " + ((minutes%525600)/1440) + " d");
+			str = (minutes + " min = " + minutes/525600 + " y and " + ((minutes%525600)/1440) + " d");
 		}
 		
-		return null;
+		return str;
 	}
 
 	/**
@@ -217,30 +220,31 @@ public class EvaluationService {
 	 * statement or switch statement whatever is easier for you.
 	 */
 	public String printNumberInWord(int number) {
+		String str;
 		if (number == 0) {
-			System.out.println("ZERO");
+			str = ("ZERO");
 		} else if (number == 1) {
-			System.out.println("ONE");
+			str = ("ONE");
 		} else if (number == 2) {
-			System.out.println("TWO");
+			str = ("TWO");
 		} else if (number == 3) {
-			System.out.println("THREE");
+			str = ("THREE");
 		}else if (number == 4) {
-			System.out.println("FOUR");
+			str = ("FOUR");
 		}else if (number == 5) {
-			System.out.println("FIVE");
+			str = ("FIVE");
 		}else if (number == 6) {
-			System.out.println("SIX");			
+			str = ("SIX");			
 		}else if (number == 7) {
-			System.out.println("SEVEN");			
+			str = ("SEVEN");			
 		}else if (number == 8) {
-			System.out.println("EIGHT");			
+			str = ("EIGHT");			
 		}else if (number == 9) {
-			System.out.println("NINE");			
+			str = ("NINE");			
 		}else {
-			System.out.println("OTHER");			
+			str = ("OTHER");			
 		}
-		return null;
+		return str;
 	}
 
 	/**
@@ -314,6 +318,9 @@ public class EvaluationService {
 	 */
 	public String reverse(String string) {
 		String result = "";
+		if(string == result) {
+			return result;
+		}
 	    for(int i = string.length()-1; i>=0; i--) {
 	        result = result + string.charAt(i);
 	    }
@@ -650,29 +657,32 @@ public class EvaluationService {
 	 */
 	public int calculateNthPrime(int k) { 
 		
-		List<Integer> mayPrimes;
-		List<Integer> primes;
+		if (k == 0) {
+			throw new IllegalArgumentException();
+		}
+		List<Integer> nums; //list to whittle down
+		List<Integer> primes; //list of primes
 		
 		primes = new ArrayList<Integer>(k);
 		primes.add(2);
-		mayPrimes = new LinkedList<Integer>();
+		nums = new LinkedList<Integer>();
 		
 		for (int i = 0; i < k/2; i++) {
-			mayPrimes.add(i * 2 + 3);
+			nums.add(i * 2 + 3);
 		}
 		while (primes.size() != k) {
-			int prime = mayPrimes.remove(0);
+			int prime = nums.remove(0);
 			for (int i = 0; i < k / prime; i++) {
-				mayPrimes.remove(new Integer(prime * i));
+				nums.remove(new Integer(prime * i));
 			}
 			primes.add(prime);
 			if (prime * prime > k) {
-				primes.addAll(mayPrimes);
+				primes.addAll(nums);
 					break;
 				}
 			}
 		if (primes.size() >= k) {
-			return primes.get(k - 1);
+			return primes.get(k - 1); //nth prime
 		} else {
 			return -1;
 		
